@@ -17,7 +17,7 @@ export interface VariantImage {
 export interface ProductVariant {
   variant_id: number;
   sku: string;
-  price_modifier: string;
+  price_modifier: string | null;
   stock_quantity: number;
   variant_attributes: VariantAttribute[];
   variant_images: VariantImage[];
