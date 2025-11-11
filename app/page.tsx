@@ -6,6 +6,7 @@ import ProductFilter from "./components/ProductFilter";
 import ProductCard from "./components/ProductCard";
 import { getProducts } from "../lib/products";
 import { Product, ProductImage } from "../lib/types";
+import { getFinalPrice, getPrimaryImage } from "@/lib/utils";
 
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -75,26 +76,6 @@ export default function Home() {
       )
     ),
   ];
-
-  const getPrimaryImage = (product: Product): ProductImage | null => {
-    for (const variant of product.product_variants) {
-      const primary = variant.variant_images.find((img) => img.is_primary);
-      if (primary) return { url: primary.image_url, altText: null };
-      if (variant.variant_images.length > 0)
-        return { url: variant.variant_images[0].image_url, altText: null };
-    }
-    return null;
-  };
-
-  const getFinalPrice = (product: Product): string => {
-    const basePrice = parseFloat(product.base_price);
-    const firstVariant = product.product_variants[0];
-    if (firstVariant?.price_modifier) {
-      const modifier = parseFloat(firstVariant.price_modifier);
-      return (basePrice + modifier).toFixed(2);
-    }
-    return basePrice.toFixed(2);
-  };
 
   return (
     <div className="min-h-screen bg-gray-50">
