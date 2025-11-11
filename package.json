@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "jest --watch"
+    "test": "jest"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.79.0",
